@@ -14,6 +14,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+
     @PostMapping("/add")
     public String addCourse(@RequestBody Course course) {
         courseService.addCourse(course);
