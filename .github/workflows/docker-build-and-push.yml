@@ -16,11 +16,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Maven
-        run: sudo apt-get update && sudo apt-get install -y maven
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Debug Environment
+        run: printenv | sort
 
       - name: Build the JAR
         run: mvn clean package
+        env:
+          MAVEN_OPTS: "-Xmx1024m"
 
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/course-api:latest .
