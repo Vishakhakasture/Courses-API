@@ -15,4 +15,6 @@ public interface CourseService {
     void updateCourse(Integer id, Course course);
 
     void deleteCourse(Integer id);
+
+    List<String> getAllCourseTitles();
 }

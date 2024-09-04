@@ -50,4 +50,14 @@ public class InstanceServiceImpl implements InstanceService {
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid course instance id " +id));
     }
+
+    @Override
+    public Instance getInstanceByYearNID(Integer year, Integer id) {
+        Instance instance = instanceRepository
+                .findById(year)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Invaid instance course year "+year));
+
+        return instance;
+    }
+
 }

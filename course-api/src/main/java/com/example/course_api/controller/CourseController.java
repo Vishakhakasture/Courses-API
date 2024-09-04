@@ -44,4 +44,10 @@ public class CourseController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/titles")
+    public ResponseEntity<List<String>> getCourseTitles() {
+        List<String> courseTitles = courseService.getAllCourseTitles();
+        return ResponseEntity.ok(courseTitles);
+    }
+
 }

@@ -1,4 +1,6 @@
 package com.example.course_api.service.impl;
+import java.util.stream.Collectors;
+
 
 import com.example.course_api.entity.Course;
 import com.example.course_api.repository.CourseRepository;
@@ -51,6 +53,14 @@ public class CourseServiceImpl implements CourseService {
                         .findById(id)
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid course id " +id));
 
+    }
+
+    @Override
+    public List<String> getAllCourseTitles() {
+        return courseRepository.findAll()
+                .stream()
+                .map(Course::getTitle)
+                .collect(Collectors.toList());
     }
 
 

@@ -15,4 +15,6 @@ public interface InstanceService {
     void updateInstance(Integer id, Instance instance);
 
     void deleteInstance(Integer id);
+
+    Instance getInstanceByYearNID(Integer year, Integer id);
 }
