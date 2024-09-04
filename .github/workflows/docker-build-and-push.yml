@@ -47,4 +47,5 @@ jobs:
 
     - name: Push Docker image
       run: |
+        docker build -t vishakha103/course-api:latest
         docker push vishakha103/course-api:latest
