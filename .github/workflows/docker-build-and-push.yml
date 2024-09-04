@@ -1,6 +1,4 @@
-
-Copy code
-name: Build and Deploy
+name: Build, Dockerize, and Push
 
 on:
   push:
@@ -23,24 +21,21 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: 17
+          java-version: '17'
           java-package: jdk
-          check-latest: false
-          server-id: github
-          server-username: ${{ github.actor }}
-          server-password: ${{ secrets.GITHUB_TOKEN }}
-          overwrite-settings: true
-          job-status: success
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Change directory to 'course-api' and build with Maven
+      # Build with Maven
       - name: Build with Maven
         run: |
           cd course-api
           mvn clean install
-          
+
+      # Docker Build and Push
       - name: Docker Build and Push
         run: |
-          cd course-api 
-          docker build -t vishakha103/course-api:tag .
-          docker push vishakha103/course-api:tag
+          cd course-api
+          docker build -t vishakha103/course-api:latest .
+          docker push vishakha103/course-api:latest
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_AUTH_CONFIG: ${{ secrets.DOCKER_AUTH_CONFIG }}
