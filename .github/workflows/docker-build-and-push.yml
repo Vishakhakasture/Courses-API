@@ -16,8 +16,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List root directory
+      - name: List directory contents
         run: ls -la
+
+      - name: Print working directory
+        run: pwd
+
+      - name: Display Java version
+        run: java -version
+
+      - name: Display Maven version
+        run: mvn -v
 
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -26,7 +35,7 @@ jobs:
           java-version: '17'
 
       - name: Build the JAR
-        run: mvn clean package
+        run: mvn clean package -X
         env:
           MAVEN_OPTS: "-Xmx1024m"
 
