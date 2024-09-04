@@ -22,9 +22,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Debug Environment
-        run: printenv | sort
-
       - name: Build the JAR
         run: mvn clean package
         env:
