@@ -1,4 +1,4 @@
-name: Java CI with Maven and Docker
+name: Build and Push Docker Image
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
     - name: Build with Maven (Verbose)
       run: |
         cd course-api
-        mvn clean install -X
+        mvn clean install -U -X
 
     - name: Build Docker image
       run: |
