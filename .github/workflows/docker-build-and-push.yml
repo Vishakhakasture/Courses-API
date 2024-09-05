@@ -21,18 +21,16 @@ jobs:
       with:
         java-version: 17
         distribution: temurin
-        java-package: jdk
-        check-latest: false
-        server-id: github
-        server-username: ${{ secrets.GITHUB_ACTOR }}
-        server-password: ${{ secrets.GITHUB_TOKEN }}
-        overwrite-settings: true
-        job-status: success
 
-    - name: Build with Maven (Skip Tests)
+    - name: Build with Maven (Verbose)
       run: |
         cd course-api
-        mvn clean install -DskipTests
+        mvn clean install -U -DskipTests -X
+
+    - name: Verify JAR file
+      run: |
+        cd course-api
+        if [ -f "target/course-api.jar" ]; then echo "JAR file exists."; else echo "JAR file not found!" && exit 1; fi
 
     - name: Build Docker image
       run: |
