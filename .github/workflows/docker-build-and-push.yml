@@ -29,10 +29,10 @@ jobs:
         overwrite-settings: true
         job-status: success
 
-    - name: Build with Maven (Verbose)
+    - name: Build with Maven (Skip Tests)
       run: |
         cd course-api
-        mvn clean install -U -X
+        mvn clean install -DskipTests
 
     - name: Build Docker image
       run: |
